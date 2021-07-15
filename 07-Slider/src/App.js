@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { FaQuoteRight } from 'react-icons/fa';
 import data from './data';
+import Button from './Button';
+
 function App() {
   const [people, setPeople] = useState(data)
-  const [index, setIndex] = useState(1)
+  const [index, setIndex] = useState(0)
 
-  useEffect(()=>{
-    const lastIndex = people.length-1
-    if(index>lastIndex){
-      setIndex(0)
-    }
-    if(index<0){
-      setIndex(lastIndex)
-    }
-  },[index,people])
+  // useEffect(()=>{
+  //   const lastIndex = people.length-1
+  //   if(index>lastIndex){
+  //     setIndex(0)
+  //   }
+  //   if(index<0){
+  //     setIndex(lastIndex)
+  //   }
+  // },[index,people])
 
-  useEffect(()=>{
-    const load = setInterval(()=>{
-      setIndex(index+1)
-    },2000)
+  // useEffect(()=>{
+  //   const load = setInterval(()=>{
+  //     setIndex(index+1)
+  //   },2000)
 
-    return ()=>{
-      clearInterval(load)
-    }
-  },[index])
+  //   return ()=>{
+  //     clearInterval(load)
+  //   }
+  // },[index])
+
 
   return (
     <section className="section">
@@ -55,8 +57,9 @@ function App() {
             </article>
           )
         })}
-        <button className="prev" onClick={()=>{setIndex(index-1)}}>{<FiChevronLeft></FiChevronLeft>}</button>
-        <button className="next" onClick={()=>{setIndex(index+1)}}>{<FiChevronRight></FiChevronRight>}</button>
+        <Button click={index} clickChanger = {(index)=>{
+          setIndex(index)
+        }} ></Button>
       </div>
     </section>
   );
